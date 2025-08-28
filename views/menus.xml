@@ -1,0 +1,15 @@
+<odoo>
+    <menuitem 
+        id="menu_library_root" 
+        name="Library"
+        sequence="10"
+    />
+
+    <menuitem 
+        id="menu_books_list" 
+        name="Books"
+        parent="menu_library_root"
+        action="action_kanban_books"
+        sequence="10"
+    />
+</odoo>

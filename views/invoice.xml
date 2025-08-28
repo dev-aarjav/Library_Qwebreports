@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- customize proforma invoice -->
+
+    <!-- <record id="report_saleorder_proforma_inherit_custom" model="ir.ui.view">
+        <field name="inherit_id" ref="sale.report_saleorder_document"/>
+        <field name="name">Sale Order Pro-Forma Report Customization</field>
+        <field name="arch" type="xml">
+
+            <xpath expr="//table[contains(concat(' ', normalize-space(@class), ' '), ' o_main_table ')]" position="after">
+                <p class="mt-4">
+                    <strong>Custom Pro-Forma Note:</strong> This is a non-binding offer.
+                </p>
+            </xpath>
+
+        </field>
+    </record> -->
+
+  <!-- customize invoice report  -->
+   
+    <record id="report_invoice_document_inherit_my_custom" model="ir.ui.view">
+        <field name="inherit_id" ref="account.report_invoice_document"/>
+        <field name="name">Account Invoice Report Customization</field>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@id='total']" position="before">
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Custom Note:</strong>AARJAV THIS SIDE</p>
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

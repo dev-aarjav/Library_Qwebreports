@@ -1,0 +1,71 @@
+<odoo>
+    <!-- The Report Action (no changes needed here) -->
+    <record id="action_report_books" model="ir.actions.report">
+        <field name="name">Books Report</field>
+        <field name="model">library.book</field>
+        <field name="report_name">library_book.report_book_template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_library_book"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- The Updated QWeb Report Template -->
+    <template id="report_book_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center mb-4">Library Book Details</h2>
+                    
+                    <!-- Loop through each selected book record -->
+                    <t t-foreach="docs" t-as="book">
+                        <div class="oe_structure" style="page-break-inside: avoid; margin-bottom: 20px;">
+                            <!-- Section 1: Title and Author -->
+                            <div class="row">
+                                <div class="col-8">
+                                    <h3><span t-field="book.name"/></h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <strong t-if="book.is_available" class="text-success">Available</strong>
+                                    <strong t-if="not book.is_available" class="text-danger">On Loan</strong>
+                                </div>
+                            </div>
+                            <p class="text-muted">by <span t-field="book.author"/></p>
+
+                            <!-- Section 2: Publication Details -->
+                            <table class="table table-sm table-bordered mt-4">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Publisher</th>
+                                        <th style="width: 25%;">Published Date</th>
+                                        <th style="width: 50%;">ISBN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span t-field="book.publisher_id"/></td>
+                                        <td><span t-field="book.published_date"/></td>
+                                        <td><span t-field="book.isbn"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Section 3: Summary -->
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4>Summary</h4>
+                                    <p><span t-field="book.summary"/></p>
+                                ...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add a separator line if there are multiple books -->
+                        <t t-if="not book_last">
+                            <hr style="border-top: 2px solid #666;"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
